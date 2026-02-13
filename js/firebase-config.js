@@ -1,22 +1,31 @@
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+// Firebase Core
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 
-const db = getFirestore();
+// Firebase Services
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
 
-async function checkUserRole(user) {
-  const docRef = doc(db, "users", user.uid);
-  const docSnap = await getDoc(docRef);
 
-  if (docSnap.exists()) {
-    const role = docSnap.data().role;
+// 🔥 YOUR PROJECT CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyDVzEfDFC02tzU74v7uw1hjEMTtUdNVHOQ",
+  authDomain: "primedomains-africa.firebaseapp.com",
+  projectId: "primedomains-africa",
+  storageBucket: "primedomains-africa.firebasestorage.app",
+  messagingSenderId: "186190235728",
+  appId: "1:186190235728:web:00fdbc0177cd579f7ce955",
+  measurementId: "G-WV8KCZQX73"
+};
 
-    if (role === "admin") {
-      window.location.href = "admin-dashboard.html";
-    } else if (role === "seller") {
-      window.location.href = "seller-dashboard.html";
-    } else {
-      window.location.href = "buyer-dashboard.html";
-    }
-  } else {
-    alert("User role not found");
-  }
-}
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+// Export Services
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+export const analytics = getAnalytics(app);
