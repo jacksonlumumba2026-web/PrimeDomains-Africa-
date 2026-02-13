@@ -1,17 +1,22 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDVzEfDFC02tzU74v7uw1hjEMTtUdNVHOQ",
-  authDomain: "primedomains-africa.firebaseapp.com",
-  projectId: "primedomains-africa",
-  storageBucket: "primedomains-africa.firebasestorage.app",
-  messagingSenderId: "186190235728",
-  appId: "1:186190235728:web:00fdbc0177cd579f7ce955"
-};
+const db = getFirestore();
 
-const app = initializeApp(firebaseConfig);
+async function checkUserRole(user) {
+  const docRef = doc(db, "users", user.uid);
+  const docSnap = await getDoc(docRef);
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+  if (docSnap.exists()) {
+    const role = docSnap.data().role;
+
+    if (role === "admin") {
+      window.location.href = "admin-dashboard.html";
+    } else if (role === "seller") {
+      window.location.href = "seller-dashboard.html";
+    } else {
+      window.location.href = "buyer-dashboard.html";
+    }
+  } else {
+    alert("User role not found");
+  }
+}
