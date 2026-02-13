@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | PrimeDomains Africa</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
 body{margin:0;font-family:"Poppins",sans-serif;background:#f5f7fa;}
 nav{background:#0d1b2a;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center;}
@@ -35,22 +33,18 @@ table th{background:#0d1b2a;color:white;}
 .reject-btn:hover{opacity:0.8;}
 </style>
 </head>
-
 <body>
 
-<!-- NAV -->
 <nav>
 <h1>Admin Panel</h1>
 <button onclick="logout()">Logout</button>
 </nav>
 
-<!-- HEADER -->
 <header>
 <h2>Welcome, Admin</h2>
 <p>Monitor users, domains, and platform earnings.</p>
 </header>
 
-<!-- STATS -->
 <div class="stats">
 <div class="stat-box">
 <h3 id="totalUsers">0</h3>
@@ -70,7 +64,6 @@ table th{background:#0d1b2a;color:white;}
 </div>
 </div>
 
-<!-- USERS TABLE -->
 <section>
 <h3>Users</h3>
 <table id="usersTable">
@@ -82,7 +75,6 @@ table th{background:#0d1b2a;color:white;}
 </table>
 </section>
 
-<!-- DOMAINS TABLE -->
 <section>
 <h3>Domains</h3>
 <table id="domainsTable">
@@ -97,41 +89,36 @@ table th{background:#0d1b2a;color:white;}
 </section>
 
 <script type="module">
-
 import { auth, db } from "./firebase-config.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
-// Logout Function
-window.logout = function() {
-signOut(auth).then(()=>{window.location.href="login.html";});
+// Logout
+window.logout = function(){
+  signOut(auth).then(()=>{window.location.href="login.html";});
 }
 
-// Approve Domain
+// Approve / Reject domain
 async function approveDomain(domainId){
   const domainRef = doc(db,"domains",domainId);
   await updateDoc(domainRef,{status:"approved"});
   alert("Domain approved");
-  location.reload();
+  loadAdminData();
 }
-
-// Reject Domain
 async function rejectDomain(domainId){
   const domainRef = doc(db,"domains",domainId);
   await updateDoc(domainRef,{status:"rejected"});
   alert("Domain rejected");
-  location.reload();
+  loadAdminData();
 }
 
-// Load Stats & Tables
+// Load stats, users, domains
 async function loadAdminData(){
-
   // USERS
   const usersSnap = await getDocs(collection(db,"users"));
   document.getElementById("totalUsers").innerText = usersSnap.size;
   const usersTable = document.getElementById("usersTable");
-  usersTable.innerHTML = `<tr>
-  <th>Email</th><th>Role</th><th>Status</th></tr>`;
+  usersTable.innerHTML = `<tr><th>Email</th><th>Role</th><th>Status</th></tr>`;
   usersSnap.forEach(doc=>{
     const data = doc.data();
     usersTable.innerHTML += `<tr>
@@ -145,30 +132,32 @@ async function loadAdminData(){
   const domainsSnap = await getDocs(collection(db,"domains"));
   document.getElementById("totalDomains").innerText = domainsSnap.size;
   const domainsTable = document.getElementById("domainsTable");
-  domainsTable.innerHTML = `<tr>
-<th>Domain Name</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr>`;
+  domainsTable.innerHTML = `<tr><th>Domain Name</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr>`;
   let totalEarnings = 0;
   domainsSnap.forEach(doc=>{
     const data = doc.data();
     const id = doc.id;
+    const status = data.status || "pending";
     domainsTable.innerHTML += `<tr>
       <td>${data.name}</td>
       <td>${data.seller}</td>
       <td>$${data.price}</td>
-      <td>${data.status || "pending"}</td>
+      <td>${status}</td>
       <td>
-        <button class="approve-btn" onclick="approveDomain('${id}')">Approve</button>
-        <button class="reject-btn" onclick="rejectDomain('${id}')">Reject</button>
+        ${status==="pending" ? `<button class="approve-btn" onclick="approveDomain('${id}')">Approve</button>
+        <button class="reject-btn" onclick="rejectDomain('${id}')">Reject</button>` : "—"}
       </td>
     </tr>`;
-    if(data.status==="approved") totalEarnings += parseFloat(data.price);
+    if(status==="approved") totalEarnings += parseFloat(data.price);
   });
   document.getElementById("totalEarnings").innerText = `$${totalEarnings}`;
+  
+  // Total sales = approved domains
+  document.getElementById("totalSales").innerText = domainsSnap.docs.filter(d=>d.data().status==="approved").length;
 }
 
 loadAdminData();
 
 </script>
-
 </body>
 </html>
