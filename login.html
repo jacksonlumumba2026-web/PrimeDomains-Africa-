@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script type="module">
+import { auth, db } from "./js/firebase-config.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+window.login = async function () {
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    const role = userDoc.data().role;
+
+    if (role === "admin") {
+      window.location.href = "admin-dashboard.html";
+    }
+
+    if (role === "seller") {
+      window.location.href = "seller-dashboard.html";
+    }
+
+    if (role === "buyer") {
+      window.location.href = "buyer-dashboard.html";
+    }
+
+  } catch (error) {
+    alert(error.message);
+  }
+}
+</script>
+
+</body>
+</html>
