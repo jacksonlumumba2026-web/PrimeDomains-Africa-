@@ -2,273 +2,842 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Web Developer | Get More Customers Online</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jackson Lumumba | Web Developer — Kenya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-body{
-  margin:0;
-  font-family:"DM Sans";
-  background:#0a0a0a;
-  color:#fff;
-}
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --gold: #c9922a;
+    --gold-light: #f0c96a;
+    --green: #1a4a2e;
+    --green-mid: #2d7a4f;
+    --white: #ffffff;
+    --muted: #6b6459;
+    --border: rgba(201,146,42,0.25);
+  }
 
-:root{
-  --green:#2ecc71;
-  --muted:#a0a0a0;
-  --card:#111;
-  --border:#1e1e1e;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* NAV */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:15px 5%;
-  background:rgba(10,10,10,0.9);
-  border-bottom:1px solid var(--border);
-  z-index:1000;
-}
+  html { scroll-behavior: smooth; }
 
-nav a{
-  color:var(--muted);
-  text-decoration:none;
-  margin:0 10px;
-  font-size:0.9rem;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
 
-.cta{
-  background:var(--green);
-  color:#000;
-  padding:8px 14px;
-  border-radius:30px;
-  font-weight:700;
-}
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
 
-/* HERO (HOOK) */
-.hero{
-  padding:140px 5% 60px;
-  text-align:left;
-}
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 6%;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
 
-.hero h1{
-  font-family:"Syne";
-  font-size:clamp(2rem,5vw,3.5rem);
-  line-height:1.1;
-}
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
 
-.hero h1 span{color:var(--green);}
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
 
-.hero p{
-  color:var(--muted);
-  max-width:600px;
-  line-height:1.6;
-  margin-top:15px;
-}
+  .nav-cta {
+    background: var(--gold);
+    color: var(--ink) !important;
+    opacity: 1 !important;
+    padding: 0.55rem 1.3rem;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-size: 0.9rem !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; }
 
-.btn{
-  display:inline-block;
-  margin-top:25px;
-  background:var(--green);
-  color:#000;
-  padding:12px 18px;
-  border-radius:30px;
-  font-weight:700;
-  text-decoration:none;
-}
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 6% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
 
-/* TRUST STRIP */
-.trust{
-  display:flex;
-  flex-wrap:wrap;
-  gap:15px;
-  padding:20px 5%;
-  color:var(--muted);
-  font-size:0.9rem;
-}
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,74,46,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(201,146,42,0.12) 0%, transparent 60%);
+  }
 
-/* SECTION */
-section{
-  padding:60px 5%;
-}
+  .hero-grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,146,42,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,146,42,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
 
-.title{
-  font-family:"Syne";
-  font-size:1.8rem;
-  margin-bottom:10px;
-}
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:15px;
-  margin-top:20px;
-}
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,146,42,0.12);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease both;
+  }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:20px;
-  border-radius:14px;
-}
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
 
-/* OFFER BOX (IMPORTANT) */
-.offer{
-  background:linear-gradient(135deg,#0f1f14,#0a0a0a);
-  border:1px solid var(--green);
-  padding:25px;
-  border-radius:16px;
-  margin-top:30px;
-}
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
 
-.price{
-  color:var(--green);
-  font-size:1.6rem;
-  font-weight:700;
-}
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.08;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
 
-/* CTA FIXED */
-.wa{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:55px;
-  height:55px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:1.4rem;
-  text-decoration:none;
-  color:#fff;
-  box-shadow:0 0 20px rgba(37,211,102,0.4);
-}
+  .hero h1 span { color: var(--gold); }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.7);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent;
+    color: var(--cream);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(245,240,232,0.25);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 6rem 6%; }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: rgba(245,240,232,0.6);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 480px;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section { background: var(--green); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    margin-top: 3.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .step {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .step:last-child { border-right: none; }
+  .step:hover { background: rgba(255,255,255,0.05); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+
+  .step p { font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ─── SERVICES ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    margin-top: 3.5rem;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: #141414;
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green-mid));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 0.7rem;
+  }
+
+  .service-card p { font-size: 0.9rem; color: rgba(245,240,232,0.55); line-height: 1.65; }
+
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    background: rgba(201,146,42,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-section { background: #0a0a0a; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+    background: #111;
+  }
+  .pricing-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+
+  .pricing-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, #141c14, #111);
+  }
+
+  .featured-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .plan-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .plan-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .plan-currency { font-size: 1.3rem; vertical-align: super; }
+
+  .plan-desc { font-size: 0.88rem; color: rgba(245,240,232,0.5); margin-bottom: 1.8rem; }
+
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.75);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section { background: var(--green); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .testimonial-card {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+
+  .author-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--green-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 1.1rem;
+  }
+
+  .author-name { font-weight: 600; font-size: 0.92rem; color: var(--white); }
+  .author-biz { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    text-align: center;
+    background: linear-gradient(135deg, var(--ink) 0%, #0f1f0f 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,146,42,0.1) 0%, transparent 70%);
+  }
+
+  .cta-section .section-title { max-width: 600px; margin: 0 auto 1rem; }
+  .cta-section .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+
+  .cta-features {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-feature {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.65);
+  }
+  .cta-feature::before { content: '✔'; color: var(--gold); font-weight: 700; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 6%;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+
+  .footer-copy { font-size: 0.82rem; color: rgba(245,240,232,0.35); }
+
+  /* ─── FLOATING WA BUTTON ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    z-index: 500;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5%; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 5% 4rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    section { padding: 4rem 5%; }
+    footer { flex-direction: column; text-align: center; }
+  }
 </style>
 </head>
-
 <body>
 
 <!-- NAV -->
 <nav>
-  <div><b>Jackson<span style="color:var(--green)">.</span></b></div>
-  <div>
-    <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <a class="cta" href="https://wa.me/254741590397">Hire Me</a>
+  <div class="logo">Jackson.</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="https://wa.me/254741590397" class="nav-cta">Hire Me</a></li>
+  </ul>
 </nav>
 
-<!-- HERO (HOOK) -->
+<!-- HERO -->
 <section class="hero">
-  <h1>I help businesses get <span>real customers online</span> with websites + Google visibility</h1>
-
-  <p>
-    If your business is not getting customers from Google or your website, I can fix that with a conversion-focused website and Google Maps setup.
-  </p>
-
-  <a class="btn" href="https://wa.me/254741590397">Get More Customers</a>
-</section>
-
-<!-- TRUST -->
-<div class="trust">
-  ✔ Fast delivery
-  ✔ Mobile optimized
-  ✔ WhatsApp integration
-  ✔ Google Maps setup
-</div>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="title">What I Do</div>
-
-  <div class="grid">
-    <div class="card">
-      <b>Business Websites</b>
-      <p style="color:var(--muted)">Designed to convert visitors into customers.</p>
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇰🇪 Based in Kenya &nbsp;·&nbsp; Available Now</div>
+    <h1>Your business<br/>deserves <span>real customers</span><br/>from Google.</h1>
+    <p>I build conversion-focused websites and set up Google Maps visibility so Kenyan businesses get found, trusted, and contacted — fast.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/254741590397" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Start on WhatsApp
+      </a>
+      <a href="#services" class="btn-ghost">See My Services ↓</a>
     </div>
-
-    <div class="card">
-      <b>Google Maps Setup</b>
-      <p style="color:var(--muted)">Get found when people search locally.</p>
-    </div>
-
-    <div class="card">
-      <b>WhatsApp Leads System</b>
-      <p style="color:var(--muted)">Customers contact you instantly.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Websites Built</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Day Delivery</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Mobile Ready</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section>
-  <div class="title">How It Works</div>
-
-  <div class="grid">
-    <div class="card">1. We discuss your business</div>
-    <div class="card">2. I design your website</div>
-    <div class="card">3. You start getting customers</div>
+<section class="how-section" id="how">
+  <div class="reveal">
+    <div class="section-label">The Process</div>
+    <div class="section-title">Simple. Fast. Results.</div>
+    <div class="section-sub">From first message to live website in as little as 3 days.</div>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>We Talk</h3>
+      <p>Send me a WhatsApp. We discuss your business, goals, and what customers you want to attract.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>I Build</h3>
+      <p>I design and build your website — fast-loading, mobile-first, and built to convert visitors into calls.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Get Found</h3>
+      <p>I set up Google Maps and basic SEO so people searching in your area find your business first.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Get Customers</h3>
+      <p>Your site goes live. Customers find you, trust you, and contact you directly via WhatsApp or call.</p>
+    </div>
   </div>
 </section>
 
-<!-- PRICING (CONVERSION FOCUS) -->
-<section id="pricing">
-  <div class="title">Pricing</div>
-
-  <div class="grid">
-
-    <div class="card">
-      <b>Starter</b>
-      <div class="price">KSh 3,000</div>
-      <p style="color:var(--muted)">Simple business website</p>
-    </div>
-
-    <div class="card">
-      <b>Professional</b>
-      <div class="price">KSh 8,000</div>
-      <p style="color:var(--muted)">Full system + WhatsApp leads</p>
-    </div>
-
-    <div class="card">
-      <b>Premium</b>
-      <div class="price">KSh 15,000</div>
-      <p style="color:var(--muted)">Website + Google Maps + SEO</p>
-    </div>
-
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-label">What I Offer</div>
+    <div class="section-title">Services That Grow<br/>Your Business</div>
+    <div class="section-sub">Every service is designed with one goal: more customers contacting you.</div>
   </div>
-
-  <!-- OFFER TRIGGER -->
-  <div class="offer">
-    <h3>🔥 Need customers urgently?</h3>
-    <p style="color:var(--muted)">
-      I can build your website and set up Google Maps so people find you within days.
-    </p>
-
-    <br/>
-
-    <a class="btn" href="https://wa.me/254741590397">Start Now</a>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Business Website</h3>
+      <p>A professional, fast-loading website built to turn visitors into customers. Every page is designed with a clear path to contact you.</p>
+      <div class="service-tags">
+        <span class="tag">Mobile First</span>
+        <span class="tag">Fast Load</span>
+        <span class="tag">WhatsApp Ready</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📍</div>
+      <h3>Google Maps Setup</h3>
+      <p>Get your business listed and optimised on Google Maps so local customers find you when they search for what you offer.</p>
+      <div class="service-tags">
+        <span class="tag">Google Business</span>
+        <span class="tag">Local SEO</span>
+        <span class="tag">Reviews Setup</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>WhatsApp Lead System</h3>
+      <p>Customers land on your site and instantly message you on WhatsApp. No forms, no friction — direct contact that converts.</p>
+      <div class="service-tags">
+        <span class="tag">Instant Leads</span>
+        <span class="tag">Auto Greet</span>
+        <span class="tag">Mobile</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>SEO Optimisation</h3>
+      <p>Keyword research and on-page SEO so Google ranks your business higher in search results over time.</p>
+      <div class="service-tags">
+        <span class="tag">Keyword Research</span>
+        <span class="tag">On-Page SEO</span>
+        <span class="tag">Meta Tags</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Speed Optimisation</h3>
+      <p>A slow website loses customers. I optimise images, code, and hosting to make your site load in under 2 seconds.</p>
+      <div class="service-tags">
+        <span class="tag">Performance</span>
+        <span class="tag">Core Web Vitals</span>
+        <span class="tag">Caching</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛠</div>
+      <h3>Website Fixes & Updates</h3>
+      <p>Already have a website but it's broken, slow, or outdated? I fix and update existing sites quickly and affordably.</p>
+      <div class="service-tags">
+        <span class="tag">Bug Fixes</span>
+        <span class="tag">Redesign</span>
+        <span class="tag">Content Updates</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT CTA -->
-<section id="contact">
-  <div class="title">Let’s Build Your Website</div>
-  <p style="color:var(--muted)">
-    Click below and I’ll respond instantly on WhatsApp.
-  </p>
-
-  <a class="btn" href="https://wa.me/254741590397">Talk on WhatsApp</a>
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="reveal">
+    <div class="section-label">Packages</div>
+    <div class="section-title">Transparent Pricing,<br/>Real Value</div>
+    <div class="section-sub">No hidden charges. What you see is what you pay.</div>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><span class="plan-currency">KSh</span>3,000</div>
+      <div class="plan-desc">Perfect for getting online fast</div>
+      <ul class="plan-features">
+        <li>Simple business website</li>
+        <li>Mobile optimised</li>
+        <li>WhatsApp button</li>
+        <li>Contact page</li>
+        <li>3-day delivery</li>
+      </ul>
+      <a href="https://wa.me/254741590397?text=Hi%20Jackson%2C%20I'm%20interested%20in%20the%20Starter%20package" class="btn-ghost" style="width:100%;justify-content:center;font-size:0.92rem;">Get Started →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="plan-name">Professional</div>
+      <div class="plan-price"><span class="plan-currency">KSh</span>8,000</div>
+      <div class="plan-desc">Full system for serious businesses</div>
+      <ul class="plan-features">
+        <li>Full multi-page website</li>
+        <li>WhatsApp lead system</li>
+        <li>Google Maps setup</li>
+        <li>SEO basics</li>
+        <li>Speed optimisation</li>
+        <li>5-day delivery</li>
+      </ul>
+      <a href="https://wa.me/254741590397?text=Hi%20Jackson%2C%20I'm%20interested%20in%20the%20Professional%20package" class="btn-primary" style="width:100%;justify-content:center;font-size:0.92rem;">Get Started →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price"><span class="plan-currency">KSh</span>15,000</div>
+      <div class="plan-desc">Complete online presence</div>
+      <ul class="plan-features">
+        <li>Everything in Professional</li>
+        <li>Advanced SEO</li>
+        <li>Google Ads setup guidance</li>
+        <li>Monthly analytics report</li>
+        <li>1 month support included</li>
+        <li>7-day delivery</li>
+      </ul>
+      <a href="https://wa.me/254741590397?text=Hi%20Jackson%2C%20I'm%20interested%20in%20the%20Premium%20package" class="btn-ghost" style="width:100%;justify-content:center;font-size:0.92rem;">Get Started →</a>
+    </div>
+  </div>
 </section>
 
-<!-- FLOAT -->
-<a class="wa" href="https://wa.me/254741590397">💬</a>
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="reveal">
+    <div class="section-label">Client Reviews</div>
+    <div class="section-title">What Business Owners Say</div>
+    <div class="section-sub">Real results for real Kenyan businesses.</div>
+  </div>
+  <div class="testimonials-grid reveal">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Jackson built my salon's website in 3 days. Within a week I had 4 new bookings from Google. I had no idea a website could do so much for a small business.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Amina Wanjiku</div>
+          <div class="author-biz">Beauty Salon, Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">My hardware shop is now on Google Maps and people call me every day after finding me online. Jackson set everything up quickly and explained it clearly.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div>
+          <div class="author-name">Peter Otieno</div>
+          <div class="author-biz">Hardware Store, Kisumu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The WhatsApp integration is brilliant. Customers click one button and message me directly. My response rate went up and so did my revenue. Very professional work.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">F</div>
+        <div>
+          <div class="author-name">Faith Mwangi</div>
+          <div class="author-biz">Catering Business, Mombasa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- CTA -->
+<section class="cta-section">
+  <div style="position:relative;z-index:2;" class="reveal">
+    <div class="section-label">Ready to Grow?</div>
+    <div class="section-title">Let's Get Your Business<br/>More Customers</div>
+    <div class="section-sub">Message me on WhatsApp and I'll respond immediately. Your website could be live within 3 days.</div>
+    <div class="cta-features">
+      <span class="cta-feature">Fast delivery</span>
+      <span class="cta-feature">Mobile optimised</span>
+      <span class="cta-feature">WhatsApp integration</span>
+      <span class="cta-feature">Google Maps setup</span>
+      <span class="cta-feature">Affordable pricing</span>
+    </div>
+    <a href="https://wa.me/254741590397" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Talk to Me on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Jackson.</div>
+  <div class="footer-copy">© 2026 Jackson Lumumba · Web Developer · Kenya</div>
+  <a href="https://wa.me/254741590397" style="color:var(--gold);font-size:0.85rem;text-decoration:none;">+254 741 590 397</a>
+</footer>
+
+<!-- FLOATING WA BUTTON -->
+<a href="https://wa.me/254741590397" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
